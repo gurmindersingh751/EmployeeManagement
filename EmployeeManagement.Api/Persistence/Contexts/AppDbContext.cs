@@ -1,0 +1,34 @@
+﻿using EmployeeManagement.Api.Domain.Models;
+using Microsoft.EntityFrameworkCore;
+
+namespace EmployeeManagement.Api.Persistence.Contexts
+{
+    public class AppDbContext : DbContext
+    {
+        public DbSet<Employee> Employees {  get; set; }
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<Employee>().ToTable("Employee");
+            builder.Entity<Employee>().HasKey(e => e.Id);
+            builder.Entity<Employee>().Property(e => e.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Employee>().Property(e => e.Name).IsRequired().HasMaxLength(30);
+            builder.Entity<Employee>().HasOne(e => e.Department).WithOne(e => e.Employee).HasForeignKey(e => e.EmployeeId);
+
+            builder.Entity<Employee>().HasData
+                (
+                new Employee { Id = 100, Name = "Gurminder" },
+                new Employee { Id = 101, Name = "Raminder" }
+                );
+
+            builder.Entity<Department>().ToTable("Department");
+            builder.Entity<Department>().HasKey(d => d.Id);
+            builder.Entity<Department>().Property(d => d.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Department>().Property(d => d.Name).IsRequired().HasMaxLength(50);
+
+        }
+    }
+}

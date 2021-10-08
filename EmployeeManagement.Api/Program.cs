@@ -1,3 +1,7 @@
+using EmployeeManagement.Api.Domain.Repositories;
+using EmployeeManagement.Api.Domain.Services;
+using EmployeeManagement.Api.Persistence.Repositories;
+using EmployeeManagement.Api.Services;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +13,10 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new() { Title = "EmployeeManagement.Api", Version = "v1" });
 });
+
+
+builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 
 var app = builder.Build();
 
