@@ -7,5 +7,10 @@ namespace EmployeeManagement.Api.Controllers
     [ApiController]
     public class EmployeeController : ControllerBase
     {
+        [HttpGet]
+        public IActionResult HealthCheck()
+        {
+            return Ok("Welcome to Employee Management.");
+        }
     }
 }
