@@ -24,8 +24,7 @@ namespace EmployeeManagement.Api.Services
             try
             {
                 await _employeeRepository.AddAsync(employee);
-                _unitOfWork.CompleteAsync();
-
+                await _unitOfWork.CompleteAsync();
 
                 return new EmployeeResponse(employee);
             }
@@ -33,6 +32,48 @@ namespace EmployeeManagement.Api.Services
             {
                 return new EmployeeResponse($"An error occured when saving the category: { ex.Message }");
             }
+        }
+
+        public async Task<EmployeeResponse> UpdateAsync(int id, Employee employee)
+        {
+            var existingEmployee = await _employeeRepository.FindByIdAsync(id);
+
+            if (existingEmployee == null)
+                return new EmployeeResponse($"Employee does not found.");
+
+            existingEmployee.Name = employee.Name;
+
+            try
+            {
+                _employeeRepository.Update(existingEmployee);
+                await _unitOfWork.CompleteAsync();
+
+                return new EmployeeResponse(employee);
+            }
+            catch (Exception ex)
+            {
+                return new EmployeeResponse($"An error occured while updating the employee: {ex.Message}");
+            }
+        }
+
+        public async Task<EmployeeResponse> DeleteAsync(int id)
+        {
+            var existingEmployee = await _employeeRepository.FindByIdAsync(id);
+
+            if (existingEmployee == null)
+                return new EmployeeResponse($"Employee does not found");
+            try
+            {
+                _employeeRepository.Remove(existingEmployee);
+                await _unitOfWork.CompleteAsync();
+
+                return new EmployeeResponse(existingEmployee);
+            }
+            catch (Exception ex)
+            {
+                return new EmployeeResponse($"An error occured while deleting the employee");
+            }
+
         }
     }
 }
