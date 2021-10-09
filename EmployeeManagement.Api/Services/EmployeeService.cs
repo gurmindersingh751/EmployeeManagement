@@ -1,6 +1,7 @@
 ﻿using EmployeeManagement.Api.Domain.Models;
 using EmployeeManagement.Api.Domain.Repositories;
 using EmployeeManagement.Api.Domain.Services;
+using EmployeeManagement.Api.Domain.Services.Communication;
 
 namespace EmployeeManagement.Api.Services
 {
@@ -13,8 +14,21 @@ namespace EmployeeManagement.Api.Services
         }
         public async Task<IEnumerable<Employee>> ListAsync()
         {
-            var result = await _employeeRepository.ListAsync();
-            return result;
+            return await _employeeRepository.ListAsync();
+        }
+
+        public async Task<EmployeeResponse> SaveAsync(Employee employee)
+        {
+            try
+            {
+                await _employeeRepository.AddAsync(employee);
+
+                return new EmployeeResponse(employee);
+            }
+            catch (Exception ex)
+            {
+                return new EmployeeResponse($"An error occured when saving the category: { ex.Message }");
+            }
         }
     }
 }
