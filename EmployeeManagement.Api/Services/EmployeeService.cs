@@ -8,9 +8,11 @@ namespace EmployeeManagement.Api.Services
     public class EmployeeService : IEmployeeService
     {
         private readonly IEmployeeRepository _employeeRepository;
-        public EmployeeService(IEmployeeRepository employeeRepository)
+        private readonly IUnitOfWork _unitOfWork;
+        public EmployeeService(IEmployeeRepository employeeRepository, IUnitOfWork unitOfWork)
         {
             _employeeRepository = employeeRepository;
+            _unitOfWork = unitOfWork;
         }
         public async Task<IEnumerable<Employee>> ListAsync()
         {
@@ -22,6 +24,8 @@ namespace EmployeeManagement.Api.Services
             try
             {
                 await _employeeRepository.AddAsync(employee);
+                _unitOfWork.CompleteAsync();
+
 
                 return new EmployeeResponse(employee);
             }

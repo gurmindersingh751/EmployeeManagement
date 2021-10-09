@@ -20,7 +20,6 @@ namespace EmployeeManagement.Api.Persistence.Repositories
         public async Task AddAsync(Employee employee)
         {
             await _context.Employees.AddAsync(employee);
-            _context.SaveChanges();
         }
     }
 }
