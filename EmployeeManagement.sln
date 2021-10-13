@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31710.8
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeManagement.Api", "EmployeeManagement.Api\EmployeeManagement.Api.csproj", "{122FA24F-C8CA-43FD-AB96-AC80C81410DF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeManagement.Tests", "EmployeeManagement.Tests\EmployeeManagement.Tests.csproj", "{3F873BE4-D53D-47AD-B633-8C7A9652F1FC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{122FA24F-C8CA-43FD-AB96-AC80C81410DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{122FA24F-C8CA-43FD-AB96-AC80C81410DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{122FA24F-C8CA-43FD-AB96-AC80C81410DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F873BE4-D53D-47AD-B633-8C7A9652F1FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F873BE4-D53D-47AD-B633-8C7A9652F1FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F873BE4-D53D-47AD-B633-8C7A9652F1FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F873BE4-D53D-47AD-B633-8C7A9652F1FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

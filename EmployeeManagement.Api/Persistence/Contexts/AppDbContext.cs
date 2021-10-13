@@ -8,7 +8,9 @@ namespace EmployeeManagement.Api.Persistence.Contexts
         public DbSet<Employee> Employees {  get; set; }
         public DbSet<Department> Departments { get; set; }
 
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -22,8 +24,7 @@ namespace EmployeeManagement.Api.Persistence.Contexts
 
             builder.Entity<Employee>().HasData
                 (
-                new Employee { Id = 100, Name = "Gurminder" },
-                new Employee { Id = 101, Name = "Raminder" }
+                new Employee { Id = 1, Name = "Harjinder" }
                 );
 
             builder.Entity<Department>().ToTable("Departments");

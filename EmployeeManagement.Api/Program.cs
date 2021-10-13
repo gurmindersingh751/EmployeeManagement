@@ -5,6 +5,7 @@ using EmployeeManagement.Api.Persistence.Repositories;
 using EmployeeManagement.Api.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,10 +22,13 @@ builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddAutoMapper(typeof(Program));
 
-builder.Services.AddDbContext<AppDbContext>(options =>
-{
-    options.UseInMemoryDatabase("employees-api-in-memory");
-});
+//builder.Services.AddDbContext<AppDbContext>(options =>
+//{
+//    options.UseInMemoryDatabase("employees-api-in-memory");
+//});
+
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite("Data Source = EmployeeManagement.Db"));
+
 
 
 var app = builder.Build();
